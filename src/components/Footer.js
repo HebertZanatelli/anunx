@@ -1,8 +1,8 @@
 
-const Footer = ({msg}) => {
+const Footer = () => {
     return(
         <>
-        {msg}
+        Footer
         </>
     )
 }

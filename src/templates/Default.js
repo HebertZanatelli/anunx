@@ -6,7 +6,7 @@ const Default = ({ children }) => {
         <>
             <Header />
             {children}
-            <Footer msg='Footer teste ' />
+            <Footer />
         </>
     )
 }
