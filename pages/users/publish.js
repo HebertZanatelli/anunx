@@ -3,7 +3,11 @@ import {
     Box,
     Button,
     Container,
+    FormControl,
     IconButton,
+    InputAdornment,
+    InputLabel,
+    OutlinedInput,
     Select,
     TextField,
     Typography
@@ -205,7 +209,7 @@ const Publish = () => {
                                         }
 
                                         <Box className={classes.mask}>
-                                            <IconButton color='secondary' onClick={ () => handleRemoveFile(file.name)}>
+                                            <IconButton color='secondary' onClick={() => handleRemoveFile(file.name)}>
                                                 <DeleteForever fontSize='large' />
                                             </IconButton>
                                         </Box>
@@ -232,6 +236,22 @@ const Publish = () => {
                         fullWidth
                         className={classes.espaco}
                     />
+                </Box>
+            </Container>
+
+            <Container maxWidth='md'>
+                <Box className={classes.box}>
+                    <Typography component='h6' variant='h6' color='textPrimary'>
+                        Preço
+                    </Typography>
+                    <FormControl fullWidth variant='outlined' className={classes.espaco}>
+                        <InputLabel>Valor</InputLabel>
+                        <OutlinedInput 
+                        onChange={() => {}}
+                        startAdornment={<InputAdornment position='start'>R$</InputAdornment>}
+                        labelWidth={40}
+                        />
+                    </FormControl>
                 </Box>
             </Container>
 
