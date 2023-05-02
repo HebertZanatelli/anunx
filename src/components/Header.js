@@ -14,7 +14,7 @@ import {
 
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles'
-import { AccountCircle, MenuIcon } from '@material-ui/icons'
+import { AccountCircle  } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
