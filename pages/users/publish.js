@@ -6,9 +6,11 @@ import {
   Button,
   Container,
   FormControl,
+  FormHelperText,
   IconButton,
   InputAdornment,
   InputLabel,
+  MenuItem,
   OutlinedInput,
   Select,
   TextField,
@@ -89,11 +91,15 @@ const useStyles = makeStyles((theme) => {
 })
 
 const validationSchema = object({
-  title: 
+  title:
+    string()
+      .required('Campo obrigatório')
+      .min(6, 'Escreva um titulo maior')
+      .max(100, 'Titulo muito grande, deixe um pouco para descrição.'),
+
+  category:
   string()
   .required('Campo obrigatório')
-  .min(6, 'Escreva um titulo maior')
-  .max(100, 'Titulo muito grande, deixe um pouco para descrição.'),
 });
 
 const Publish = () => {
@@ -128,7 +134,8 @@ const Publish = () => {
     <TemplateDefault>
       <Formik
         initialValues={{
-          title: ''
+          title: '',
+          category: '',
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -173,33 +180,35 @@ const Publish = () => {
                     <Typography component='h6' variant='h6' color='textPrimary' className={classes.espaco}>
                       Categoria
                     </Typography>
-                    <Select
-                      native
-                      value=''
-                      fullWidth
-                      onChange={() => { }}
-                      inputProps={{
-                        name: 'age'
-                      }}
-                    >
-                      <option value=''>Selecione</option>
-                      <option value={1}>Bebê e Crianças</option>
-                      <option value={1}>Agricultura</option>
-                      <option value={1}>Moda</option>
-                      <option value={1}>Carros, Motos e Barcos</option>
-                      <option value={1}>Serviços</option>
-                      <option value={1}>Lazer</option>
-                      <option value={1}>Animais</option>
-                      <option value={1}>Móveis, Casa e Jardim</option>
-                      <option value={1}>Imóveis</option>
-                      <option value={1}>Equipamentos e Ferramentas</option>
-                      <option value={1}>Celulares e Tablets</option>
-                      <option value={1}>Esporte</option>
-                      <option value={1}>Tecnologia</option>
-                      <option value={1}>Empregos</option>
-                      <option value={1}>Outros</option>
-                    </Select>
+                    <FormControl error={errors.category} fullWidth>
 
+                      <Select
+                        name='category'
+                        value={values.category}
+                        fullWidth
+                        onChange={handleChange}
+
+                      >
+                        <MenuItem value='Bebê e Crianças'>Bebê e Crianças</MenuItem>
+                        <MenuItem value='Agricultura'>Agricultura</MenuItem>
+                        <MenuItem value='Moda'>Moda</MenuItem>
+                        <MenuItem value='Carros, Motos e Barcos'>Carros, Motos e Barcos</MenuItem>
+                        <MenuItem value='Serviços'>Serviços</MenuItem>
+                        <MenuItem value='Lazer'>Lazer</MenuItem>
+                        <MenuItem value='Animais'>Animais</MenuItem>
+                        <MenuItem value='Móveis, Casa e Jardim'>Móveis, Casa e Jardim</MenuItem>
+                        <MenuItem value='Imóveis'>Imóveis</MenuItem>
+                        <MenuItem value='Equipamentos e Ferramentas'>Equipamentos e Ferramentas</MenuItem>
+                        <MenuItem value='Celulares e Tablets'>Celulares e Tablets</MenuItem>
+                        <MenuItem value='Esporte'>Esporte</MenuItem>
+                        <MenuItem value='Tecnologia'>Tecnologia</MenuItem>
+                        <MenuItem value='Empregos'>Empregos</MenuItem>
+                        <MenuItem value='Outros'>Outros</MenuItem>
+                      </Select>
+                      <FormHelperText>
+                        {errors.category}
+                      </FormHelperText>
+                    </FormControl>
                   </Box>
 
                 </Container>
