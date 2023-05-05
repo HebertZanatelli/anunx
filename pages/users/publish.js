@@ -11,7 +11,6 @@ import {
   InputAdornment,
   InputLabel,
   MenuItem,
-  OutlinedInput,
   Select,
   Input,
   Typography
@@ -106,7 +105,20 @@ const validationSchema = object({
   description:
     string()
       .required('Campo Obrigatório')
-      .min(50, 'Escreva uma descrição detalhada, com pelo menos 50 caracteres')
+      .min(50, 'Escreva uma descrição detalhada, com pelo menos 50 caracteres'),
+  price:
+    number()
+      .required('Campo Obrigatório'),
+  email:
+    string()
+      .email('Digite um e-mail válido')
+      .required('Campo Obrigatório'),
+  name:
+    string()
+      .required('Campo Obrigatório'),
+  phone:
+    number()
+      .required('Campo Obrigatório'),
 });
 
 const Publish = () => {
@@ -144,6 +156,10 @@ const Publish = () => {
           title: '',
           category: '',
           description: '',
+          price: '',
+          email: '',
+          name: '',
+          phone: '',
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -287,16 +303,19 @@ const Publish = () => {
 
                 <Container maxWidth='md'>
                   <Box className={classes.box}>
-                    <Typography component='h6' variant='h6' color='textPrimary'>
-                      Preço
-                    </Typography>
-                    <FormControl fullWidth variant='outlined' className={classes.espaco}>
-                      <InputLabel>Valor</InputLabel>
-                      <OutlinedInput
-                        onChange={() => { }}
+                    <FormControl error={errors.price} fullWidth>
+                      <InputLabel className={classes.inputLabel}>Preço de venda</InputLabel>
+                      <Input
+                        name='price'
+                        value={values.price}
+                        variant='outlined'
+                        onChange={handleChange}
                         startAdornment={<InputAdornment position='start'>R$</InputAdornment>}
-                        labelWidth={40}
+                        className={classes.espaco}
                       />
+                      <FormHelperText>
+                        {errors.price}
+                      </FormHelperText>
                     </FormControl>
                   </Box>
                 </Container>
@@ -309,27 +328,39 @@ const Publish = () => {
                     <Typography component='div' variant='body2' color='textPrimary'>
                       Escreva os detalhes do produto que está vendendo.
                     </Typography>
-                    <Input
-                      label='Nome'
-                      size='small'
-                      variant='outlined'
-                      fullWidth
-                      className={classes.espaco}
-                    />
-                    <Input
-                      label='E-mail'
-                      size='small'
-                      variant='outlined'
-                      fullWidth
-                      className={classes.espaco}
-                    />
-                    <Input
-                      label='Telefone'
-                      size='small'
-                      variant='outlined'
-                      fullWidth
-                      className={classes.espaco}
-                    />
+                    <FormControl error={errors.name} fullWidth>
+                      <InputLabel className={classes.inputLabel}>Nome</InputLabel>
+                      <Input
+                        name='name'
+                        value={values.name}
+                        onChange={handleChange}
+                      />
+                      <FormHelperText>
+                        {errors.name}
+                      </FormHelperText>
+                    </FormControl>
+                    <FormControl error={errors.email} fullWidth>
+                      <InputLabel className={classes.inputLabel}>E-mail</InputLabel>
+                      <Input
+                        name='email'
+                        value={values.email}
+                        onChange={handleChange}
+                      />
+                      <FormHelperText>
+                        {errors.email}
+                      </FormHelperText>
+                    </FormControl>
+                    <FormControl error={errors.phone} fullWidth>
+                      <InputLabel className={classes.inputLabel}>Telefone</InputLabel>
+                      <Input
+                        name='phone'
+                        value={values.phone}
+                        onChange={handleChange}
+                      />
+                      <FormHelperText>
+                        {errors.phone}
+                      </FormHelperText>
+                    </FormControl>
                   </Box>
 
                 </Container>
@@ -343,13 +374,8 @@ const Publish = () => {
             )
           }
         }
-
-
       </Formik>
-
-
     </TemplateDefault>
-
   )
 }
 
