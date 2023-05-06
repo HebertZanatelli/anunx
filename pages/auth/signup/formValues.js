@@ -1,27 +1,40 @@
-import * as yup from 'yup';
+import {
+    object,
+    string,
+    ref
+} from 'yup';
+
+/* não esquecer que vc levou muito tempo procurando o "erro do cógido", mas é porque nao tinha importado
+o REF, então, quando for importar o yup, impora igual o exemplo abaixo:
+import * as yup from 'yup'; */
 
 const initialValues = {
     name: '',
     email: '',
     password: '',
     passwordConf: '',
-};
+}
 
-const validationSchema = yup.object().shape({
-    name: yup.string()
-        .required('Campo Obrigatório'),
-    email: yup.string()
-        .email('Digite um e-mail válido')
-        .required('Campo Obrigatório'),
-    password: yup.string()
+const validationSchema = object({
+    name:
+        string()
+            .required('Campo Obrigatório'),
+    email:
+        string()
+            .email('Digite um e-mail válido')
+            .required('Campo Obrigatório'),
+    password:
+        string()
         .min(6, 'Senha muito curta, insira pelo menos 6 caracteres')
-        .required('Campo Obrigatório'),
-    passwordConf: yup.string()
-        .required('Campo Obrigatório')
-        .oneOf([yup.ref('password'), null], 'As senhas precisam ser iguais'),
-});
+            .required('Campo Obrigatório'),
+    passwordConf:
+        string()
+            .required('Campo Obrigatório')
+            .oneOf([ref('password'), null], 'As senhas precisam ser iguais')
+
+})
 
 export {
     initialValues,
-    validationSchema,
-};
+    validationSchema
+}
