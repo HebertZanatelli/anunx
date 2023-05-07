@@ -17,7 +17,7 @@ const useStyles = makeStyles( theme => ({
         height: '100vh',
     },
     image: {
-        backgroundImage: 'url(https://apkdone.com/wp-content/uploads/2020/12/OLX-poster.jpg)',
+        backgroundImage: 'url(https://source.unsplash.com/random?a=12   )',
         backgroundRepeat: 'no-repeat',
         backgroundColor: '#ccc',
         backgroundPosition: 'center',

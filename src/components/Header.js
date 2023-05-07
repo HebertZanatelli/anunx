@@ -14,7 +14,7 @@ import {
 
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles'
-import { AccountCircle  } from '@material-ui/icons'
+import { AccountCircle } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -52,7 +52,10 @@ export default function ButtonAppBar() {
         <Container maxWidth='lg' className={classes.menuContainer}>
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-              AnunX
+              <Link href='/' className={classes.txtLink}>
+
+                AnunX
+                </Link>
             </Typography>
             <Link href='/users/publish' className={classes.txtLink}>
               <Button color="inherit" variant='outlined'>
@@ -83,9 +86,9 @@ export default function ButtonAppBar() {
                 <MenuItem>Meus anúncios</MenuItem>
               </Link>
               <Link href='/users/publish' passHref className={classes.txtLinkAncora}>
-              <MenuItem>Publicar novo anúncio</MenuItem>
+                <MenuItem>Publicar novo anúncio</MenuItem>
               </Link>
-              <Divider className={classes.divider}/>
+              <Divider className={classes.divider} />
               <MenuItem>Sair</MenuItem>
 
 
