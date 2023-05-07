@@ -8,11 +8,21 @@ const useStyles = makeStyles((theme) => {
             marginTop: theme.spacing(3),
         },
         espaco: {
-            marginTop: theme.spacing(2)
+            marginTop: theme.spacing(2),
+            
         },
         formControl: {
             marginBottom: theme.spacing(1)
         },
+        loading: {
+            display: 'block',
+            margin: '10px auto'
+        },
+        txtLink: {
+            textDecoration: 'none',
+           
+
+        }
         
     }
     )

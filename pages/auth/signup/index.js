@@ -1,7 +1,10 @@
 import { Formik } from 'formik'
+import axios from 'axios'
+import { useRouter } from 'next/router'
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   FormControl,
   FormHelperText,
@@ -13,21 +16,35 @@ import {
 
 import TemplateDefault from '../../../src/templates/Default'
 import { initialValues, validationSchema } from './formValues'
+import useToasty from '../../../src/contexts/Toasty'
 import useStyles from './styles'
-
-
-
+import Link from 'next/link'
 
 const Signup = () => {
   const classes = useStyles()
+  const router = useRouter()
+  const { setToasty } = useToasty()
+
+  const handleFormSubmit = async (values) => {
+    const response = await axios.post('/api/users', values)
+
+    if (response.data.success) {
+      setToasty({
+        open: true,
+        severity: 'success',
+        text: 'Cadastro realizado com sucesso!'
+      })
+
+      router.push('/auth/signin')
+    }
+  }
+
   return (
     <TemplateDefault>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log('ok enviou o form', values)
-        }}
+        onSubmit={handleFormSubmit}
       >
         {
           ({
@@ -36,6 +53,7 @@ const Signup = () => {
             errors,
             handleChange,
             handleSubmit,
+            isSubmitting,
           }) => {
 
             return (
@@ -98,16 +116,19 @@ const Signup = () => {
                         {errors.passwordConf && touched.passwordConf ? errors.passwordConf : null}
                       </FormHelperText>
                     </FormControl>
-
-                    <Button
-                      type='submit'
-                      variant='contained'
-                      color='primary'
-                      fullWidth className={classes.espaco}
-                    >
-                      Cadastrar
-                    </Button>
-                    <Typography variant='body2' className={classes.espaco}>Já tem uma conta? Entre aqui</Typography>
+                    {
+                      isSubmitting
+                        ? <CircularProgress className={classes.loading} />
+                        : <Button
+                          type='submit'
+                          variant='contained'
+                          color='primary'
+                          fullWidth className={classes.espaco}
+                        >
+                          Cadastrar
+                        </Button>
+                    }
+                    <Link href='/auth/signin' passHref className={classes.txtLink}><Typography color="textPrimary" variant="subtitle1" className={classes.espaco}> Já tem uma conta? Entre aqui </Typography></Link>
                   </Box>
                 </Container>
               </form>
